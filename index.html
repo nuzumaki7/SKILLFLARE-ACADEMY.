@@ -936,3 +936,159 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+<!-- 1. Pehle ye Firebase ke SDK tags check kar lena ki aapke <head> me hain ya nahi, agar nahi hain toh wahan daal dena -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+<!-- 2. Ye hai aapka poora JavaScript Engine jise index.html ke aakhir me replace karna hai -->
+<script>
+// --- STEP A: APNI FIREBASE CONFIGURATION KEYS YAHAN DALEIN ---
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Firebase Initialize Engine
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// --- STEP B: ADMIN CONTROL PANEL LOGIN ENGINE ---
+function adminLogin() {
+    let pin = prompt("Enter Admin Secure Password Pin:");
+    if (pin === "1234") {
+        alert("Login Successful! Ab aap text, videos aur address edit kar sakte hain.");
+        document.body.classList.add('admin-mode-active');
+        
+        // Sabhi editable fields ko highlight karna (Dashed border active)
+        document.querySelectorAll('[data-editable="text"]').forEach(el => {
+            el.contentEditable = "true";
+            el.style.border = "2px dashed red";
+            el.style.padding = "2px";
+        });
+    } else if (pin !== null) {
+        alert("Galat Password! Access Denied.");
+    }
+}
+
+// --- STEP C: YOUTUBE & SHORTS LINK FILTER ENGINE ---
+function modifyVideoLink(frameId) {
+    if(!document.body.classList.contains('admin-mode-active')) return;
+    let currentSrc = document.getElementById(frameId).src;
+    let newUrl = prompt("Enter Full YouTube Share/Embed/Shorts Link Here:", currentSrc);
+    if(newUrl) {
+        let cleanId = extractYoutubeId(newUrl);
+        if(cleanId) {
+            document.getElementById(frameId).src = "https://www.youtube.com/embed/" + cleanId;
+            // Link change hote hi automatically object dynamic data ready karega
+        } else {
+            alert("Could not filter valid YouTube URL format ID. Please ensure link is correct.");
+        }
+    }
+}
+
+function extractYoutubeId(url) {
+    // Shorts format check (youtube.com/shorts/...)
+    if (url.includes('shorts/')) {
+        let parts = url.split('shorts/');
+        if (parts[1]) {
+            return parts[1].split(/[?#&]/)[0];
+        }
+    }
+    // Normal formats check
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+// --- STEP D: REALTIME CLOUD DATABASE SAVE ENGINE ---
+function saveAdminDataOffline() {
+    let editablePayload = {};
+    document.querySelectorAll('[data-editable="text"]').forEach(el => {
+        editablePayload[el.id] = el.innerText;
+    });
+    
+    let imagesPayload = {};
+    document.querySelectorAll('[data-editable="image"]').forEach(img => {
+        if(img.src) imagesPayload[img.id] = img.src;
+    });
+
+    let videosPayload = {
+        "vid-frame-1": document.getElementById('vid-frame-1') ? document.getElementById('vid-frame-1').src : "",
+        "vid-frame-2": document.getElementById('vid-frame-2') ? document.getElementById('vid-frame-2').src : ""
+    };
+    
+    let container = document.getElementById('reviewsContainer');
+    let reviewsPayload = container ? container.innerHTML : "";
+
+    // LocalStorage ki jagah direct Firebase Cloud par save
+    database.ref('skillflare_data').set({
+        texts: editablePayload,
+        images: imagesPayload,
+        videos: videosPayload,
+        reviews: reviewsPayload
+    }).then(() => {
+        alert("Awesome! All updates, address data, and video layouts saved permanently onto Cloud Database!");
+        
+        // Admin mode border ko clean karna save hone ke baad
+        document.querySelectorAll('[data-editable="text"]').forEach(el => {
+            el.contentEditable = "false";
+            el.style.border = "none";
+        });
+        document.body.classList.remove('admin-mode-active');
+    }).catch((error) => {
+        alert("Database error: " + error.message);
+    });
+}
+
+// --- STEP E: REALTIME DATA LOAD ENGINE (ON REFRESH) ---
+window.addEventListener('DOMContentLoaded', () => {
+    database.ref('skillflare_data').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        // 1. Text aur Address live sync load
+        if (data.texts) {
+            Object.keys(data.texts).forEach(id => {
+                let el = document.getElementById(id);
+                if(el) el.innerText = data.texts[id];
+            });
+        }
+        
+        // 2. Images live sync load
+        if (data.images) {
+            Object.keys(data.images).forEach(id => {
+                let img = document.getElementById(id);
+                if(img) img.src = data.images[id];
+            });
+        }
+        
+        // 3. Videos live sync load (Bina hate permanently chalega)
+        if (data.videos) {
+            if(data.videos["vid-frame-1"] && document.getElementById('vid-frame-1')) {
+                document.getElementById('vid-frame-1').src = data.videos["vid-frame-1"];
+            }
+            if(data.videos["vid-frame-2"] && document.getElementById('vid-frame-2')) {
+                document.getElementById('vid-frame-2').src = data.videos["vid-frame-2"];
+            }
+        }
+        
+        // 4. Reviews live sync load
+        if (data.reviews && data.reviews.trim() !== "" && document.getElementById('reviewsContainer')) {
+            document.getElementById('reviewsContainer').innerHTML = data.reviews;
+        }
+    });
+});
+
+// WhatsApp Lead Form Controller Engine (Bina kisi ched-chad ke)
+if(document.getElementById('whatsappForm')) {
+    document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+        // Aapka pehle se chal raha normal form submission behavior yahan rahega...
+    });
+}
+</script>
+
