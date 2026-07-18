@@ -1,3 +1,15 @@
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 // 1. FAQ Accordion (Open/Close Effect)
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
