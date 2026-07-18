@@ -12,6 +12,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+// Admin Login System
 function adminLogin() {
     let pin = prompt("Enter Admin Secure Password Pin:");
     if (pin === "1234") {
@@ -28,6 +29,7 @@ function adminLogin() {
     }
 }
 
+// Modify YouTube link
 function modifyVideoLink(frameId) {
     if(!document.body.classList.contains('admin-mode-active')) return;
     let currentSrc = document.getElementById(frameId).src;
@@ -52,6 +54,7 @@ function extractYoutubeId(url) {
     return (match && match[2].length === 11) ? match[2] : null;
 }
 
+// Save Changes
 function saveAdminDataOffline() {
     let editablePayload = {};
     document.querySelectorAll('[data-editable="text"]').forEach(el => {
@@ -89,7 +92,80 @@ function saveAdminDataOffline() {
     });
 }
 
+// Toggle review window
+function toggleReviewForm() {
+    let block = document.getElementById('reviewFormBlock');
+    if(block) block.style.display = block.style.display === "block" ? "none" : "block";
+}
+
+// Add user review
+function submitUserReview() {
+    let name = document.getElementById('revName').value.trim();
+    let stars = document.getElementById('revStars').value;
+    let msg = document.getElementById('revMessage').value.trim();
+    if(!name || !msg) { alert("Please fill name and review text!"); return; }
+    
+    let html = `<div class="individual-review-item">
+        <button type="button" class="review-delete-btn">✖</button>
+        <div class="review-meta-info">${name}</div>
+        <div class="review-stars">${stars}</div>
+        <div class="review-user-text">"${msg}"</div>
+    </div>`;
+    
+    let container = document.getElementById('reviewsContainer');
+    if(container) container.insertAdjacentHTML('beforeend', html);
+    
+    document.getElementById('revName').value = "";
+    document.getElementById('revMessage').value = "";
+    toggleReviewForm();
+    
+    if(document.body.classList.contains('admin-mode-active')) {
+        saveAdminDataOffline();
+    } else {
+        alert("Review added locally! Admin login karke 'Save Changes' dabayein taaki permanently save ho jaye.");
+    }
+}
+
+// Dom Loader Event Listener
 window.addEventListener('DOMContentLoaded', () => {
+    
+    // Dynamic Event Bindings for Buttons
+    if(document.getElementById('adminSettingsBtn')) {
+        document.getElementById('adminSettingsBtn').addEventListener('click', adminLogin);
+    }
+    
+    if(document.getElementById('globalSaveBtn')) {
+        document.getElementById('globalSaveBtn').addEventListener('click', saveAdminDataOffline);
+    }
+    
+    if(document.getElementById('addReviewTrigger')) {
+        document.getElementById('addReviewTrigger').addEventListener('click', toggleReviewForm);
+    }
+    
+    if(document.getElementById('submitReviewBtn')) {
+        document.getElementById('submitReviewBtn').addEventListener('click', submitUserReview);
+    }
+
+    if(document.getElementById('overlay-frame-1')) {
+        document.getElementById('overlay-frame-1').addEventListener('click', () => modifyVideoLink('vid-frame-1'));
+    }
+
+    if(document.getElementById('overlay-frame-2')) {
+        document.getElementById('overlay-frame-2').addEventListener('click', () => modifyVideoLink('vid-frame-2'));
+    }
+
+    // Delete reviews dynamic delegation
+    if(document.getElementById('reviewsContainer')) {
+        document.getElementById('reviewsContainer').addEventListener('click', (e) => {
+            if(e.target.classList.contains('review-delete-btn')) {
+                if(confirm("Delete this review permanently?")) {
+                    e.target.parentElement.remove();
+                    if(document.body.classList.contains('admin-mode-active')) saveAdminDataOffline();
+                }
+            }
+        });
+    }
+
     // Accordion Control System
     document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
@@ -135,45 +211,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-function toggleReviewForm() {
-    let block = document.getElementById('reviewFormBlock');
-    if(block) block.style.display = block.style.display === "block" ? "none" : "block";
-}
-
-function submitUserReview() {
-    let name = document.getElementById('revName').value.trim();
-    let stars = document.getElementById('revStars').value;
-    let msg = document.getElementById('revMessage').value.trim();
-    if(!name || !msg) { alert("Please fill name and review text!"); return; }
-    
-    let html = `<div class="individual-review-item">
-        <button type="button" class="review-delete-btn" onclick="removeSelectedReview(this)">✖</button>
-        <div class="review-meta-info">${name}</div>
-        <div class="review-stars">${stars}</div>
-        <div class="review-user-text">"${msg}"</div>
-    </div>`;
-    
-    let container = document.getElementById('reviewsContainer');
-    if(container) container.insertAdjacentHTML('beforeend', html);
-    
-    document.getElementById('revName').value = "";
-    document.getElementById('revMessage').value = "";
-    toggleReviewForm();
-    
-    if(document.body.classList.contains('admin-mode-active')) {
-        saveAdminDataOffline();
-    } else {
-        alert("Review added locally! Admin login karke 'Save Changes' dabayein taaki permanently save ho jaye.");
-    }
-}
-
-function removeSelectedReview(btn) {
-    if(confirm("Delete this review permanently?")) {
-        btn.parentElement.remove();
-        if(document.body.classList.contains('admin-mode-active')) saveAdminDataOffline();
-    }
-}
 
 if(document.getElementById('whatsappForm')) {
     document.getElementById('whatsappForm').addEventListener('submit', function(e) {
