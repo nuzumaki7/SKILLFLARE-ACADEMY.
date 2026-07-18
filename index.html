@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkillFlare Academy offers Spoken English Classes, English Speaking Course, Public Speaking, Personality Development, Accent Training and Communication Skills in Sardarshahar, Rajasthan.">
+    <title>SkillFlare Academy | Best Spoken English Institute in Sardarshahar, Rajasthan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-dark: #0a1d37; 
+        --orange-accent: #ff9800; 
+        --text-dark: #111111;
+        --pure-white: #ffffff;
+    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    background-color: #fbfbfb;
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+.top-banner {
+    background-color: var(--primary-dark);
+    color: var(--pure-white);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: 100%;
+}
+
+.banner-sub {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.banner-main {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    letter-spacing: 0.5px;
+}
+
+header {
+    background: transparent;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.navbar .logo img {
+    height: 130px !important;
+    width: auto !important;
+    display: block;
+}
+
+.hero {
+    padding: 1rem;
+    width: 100%;
+}
+
+.hero-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hero-content h1 {
+    font-size: 2.4rem;
+    color: var(--primary-dark);
+    line-height: 1.2;
+    font-weight: 800;
+    text-align: center;
+}
+
+.hero-subtext {
+    font-size: 1.1rem;
+    color: #4a5568;
+    margin-top: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.hero-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-btn {
+    display: inline-block;
+    background-color: var(--orange-accent) !important;
+    color: var(--pure-white) !important;
+    padding: 0.85rem 2.5rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    border: none !important;
+    box-shadow: none !important;
+    text-align: center;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.bg-shape {
+    position: absolute;
+    width: 95%;
+    height: 250px;
+    object-fit: contain;
+    z-index: 1;
+    bottom: 140px; 
+}
+
+.trainer-hero-img {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+    z-index: 2;
+    margin-bottom: -20px;
+    filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.1));
+}
+
+.trainer-details-card {
+    background: var(--pure-white);
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    z-index: 3;
+    border: 1px solid #f0f0f0;
+}
+
+.trainer-name {
+    font-size: 1.5rem !important;
+    color: var(--primary-dark) !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.3rem !important;
+}
+
+.trainer-title {
+    font-size: 1rem;
+    color: #2b6cb0;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.trainer-stats p {
+    font-size: 0.95rem;
+    color: #4a5568;
+    font-weight: 600;
+    margin: 0.4rem 0;
+}
+
+/* New CSS Section for Custom Admin Video Layout Block */
+.trainer-videos-section {
+    width: 100%;
+    margin-top: 1.5rem;
+    z-index: 4;
+}
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+.video-card-wrapper {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    aspect-ratio: 16/9;
+}
+.video-card-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 2;
+}
+.video-admin-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(43, 108, 176, 0.9);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    text-align: center;
+    padding: 10px;
+}
+.admin-mode-active .video-admin-overlay {
+    display: flex;
+}
+
+.why-choose, .courses, .testimonials, .trainer, .registration, .faq {
+    padding: 3rem 1rem;
+    width: 100%;
+}
+
+h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.grid-container, .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.feature-card, .course-card {
+    background: #ffffff;
+    padding: 1.2rem 0.8rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    font-weight: 600;
+    text-align: center;
+}
+
+.trainer-card {
+    text-align: center;
+} 
+.trainer-card h3 {
+    font-size: 1.6rem;
+    color: var(--primary-dark);
+}
+
+.reg-form {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    width: 100%;
+    background: #25d366;
+    color: white;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.faq-item {
+    margin-bottom: 0.8rem;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #e2e8f0;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    cursor: pointer;
+    color: var(--primary-dark);
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 1rem 1rem;
+}
+
+.faq-answer p {
+    color: #4a5568;
+}
+
+footer {
+    background: var(--primary-dark);
+    color: white;
+    padding: 2.5rem 1rem 1rem;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+    border-top: 1px solid #1a365d;
+    padding-top: 1rem;
+}
+
+/* Reviews and Interactive Admin Styling */
+.reviews-block-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.reviews-display-list {
+    margin-bottom: 2rem;
+}
+.individual-review-item {
+    position: relative;
+    background: #fff;
+    padding: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--orange-accent);
+}
+.review-meta-info {
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+}
+.review-stars {
+    color: #ff9800;
+    margin-bottom: 0.5rem;
+}
+.review-user-text {
+    font-style: italic;
+    color: #4a5568;
+}
+.write-review-trigger-btn {
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+.review-input-modal {
+    display: none;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+    margin-top: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+/* Dynamic Safety Admin Styles */
+.admin-mode-active [contenteditable="true"] {
+    outline: 2px dashed red !important;
+    background-color: rgba(255, 0, 0, 0.05) !important;
+}
+.admin-mode-active [data-editable="image"] {
+    outline: 2px dashed #2b6cb0 !important;
+    cursor: pointer !important;
+}
+.review-delete-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 10;
+}
+.admin-mode-active .review-delete-btn {
+    display: flex;
+}
+.hidden-settings-trigger {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-left: 8px;
+    text-decoration: underline;
+}
+.hidden-settings-trigger:hover {
+    color: var(--orange-accent);
+}
+
+@media (min-width: 768px) {
+    .top-banner { padding: 1rem; }
+    .navbar .logo img { height: 150px !important; }
+    .hero-container {
+        flex-direction: row;
+        text-align: left;
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: space-between;
+    }
+    .hero-content h1, .hero-subtext { text-align: left; }
+    .hero-btn-container { justify-content: flex-start; }
+    .video-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-container, .course-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .footer-container { flex-direction: row; justify-content: space-between; }
+}
+</style>
+</head>
+<body>
+
+<input type="file" id="globalAdminImageUploader" accept="image/*" style="display: none;">
+
+<div class="top-banner">
+    <p class="banner-sub" data-editable="text" id="edit-banner-sub">Trusted by Students & Professionals from Top Places</p>
+    <p class="banner-main" data-editable="text" id="edit-banner-main">Exclusively for Career & Confidence Growth</p>
+</div>
+
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <img src="assets/logo.jpg" alt="SkillFlare Academy Logo" data-editable="image" id="edit-logo-img">
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1 data-editable="text" id="edit-hero-title">THE SKILL DEVELOPMENT ACADEMY</h1>
+            <p class="hero-subtext" data-editable="text" id="edit-hero-subtext">master english, communication, confidence personality,and career ready skills.</p>
+            <div class="hero-btn-container">
+                <a href="#register" class="hero-btn" data-editable="link" id="edit-hero-btn" data-href="#register">Start Learning Now</a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="assets/blob-shape.jpg" alt="Design Shape" class="bg-shape" data-editable="image" id="edit-bg-shape">
+            <img src="assets/trainer.jpg" alt="Trainer MOHMMAD TAIYAB" class="trainer-hero-img" data-editable="image" id="edit-trainer-img">
+            <div class="trainer-details-card">
+                <h2 class="trainer-name" data-editable="text" id="edit-trainer-name">MOHMMAD TAIYAB</h2>
+                <p class="trainer-title" data-editable="text" id="edit-trainer-title">Communication & Speaking Coach</p>
+                <div class="trainer-stats">
+                    <p data-editable="text" id="edit-stat-1">👨‍🏫 Trained 5000+ Students</p>
+                    <p data-editable="text" id="edit-stat-2">📈 2+ Years Experience</p>
+                </div>
+            </div>
+            
+            <!-- Video Container Block Underneath Trainer Card -->
+            <div class="trainer-videos-section">
+                <div class="video-grid">
+                    <div class="video-card-wrapper">
+                        <iframe id="vid-frame-1" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        <div class="video-admin-overlay" onclick="modifyVideoLink('vid-frame-1')"><i class="fas fa-edit"></i> Change Video Link</div>
+                    </div>
+                    <div class="video-card-wrapper">
+                        <iframe id="vid-frame-2" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        <div class="video-admin-overlay" onclick="modifyVideoLink('vid-frame-2')"><i class="fas fa-edit"></i> Change Video Link</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section id="why-choose-us" class="why-choose">
+    <h2 data-editable="text" id="edit-why-title">Why Choose SkillFlare?</h2>
+    <div class="grid-container">
+        <div class="feature-card"><i class="fas fa-language"></i> English Language</div>
+        <div class="feature-card"><i class="fas fa-bullhorn"></i> Public Speaking</div>
+        <div class="feature-card"><i class="fas fa-microphone"></i> Voice & Accent</div>
+        <div class="feature-card"><i class="fas fa-book-open"></i> Reading</div>
+        <div class="feature-card"><i class="fas fa-pen"></i> Writing</div>
+        <div class="feature-card"><i class="fas fa-spell-check"></i> Grammar</div>
+        <div class="feature-card"><i class="fas fa-graduation-cap"></i> Vocabulary</div>
+        <div class="feature-card"><i class="fas fa-user-tie"></i> Personality Development</div>
+    </div>
+</section>
+
+<section id="courses" class="courses">
+    <h2 data-editable="text" id="edit-courses-title">Our Courses</h2>
+    <div class="course-grid">
+        <div class="course-card"><h3>📘 Beginner English</h3></div>
+        <div class="course-card"><h3>📗 Advanced English</h3></div>
+        <div class="course-card"><h3>🎤 Public Speaking</h3></div>
+        <div class="course-card"><h3>🎯 Communication Skills</h3></div>
+        <div class="course-card"><h3>🎙 Voice & Accent</h3></div>
+        <div class="course-card"><h3>💼 Interview Preparation</h3></div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <h2 data-editable="text" id="edit-reviews-title">Student Results & Reviews</h2>
+    <div class="reviews-block-container">
+        <div class="reviews-display-list" id="reviewsContainer">
+            <div class="individual-review-item">
+                <button type="button" class="review-delete-btn" onclick="removeSelectedReview(this)">✖</button>
+                <div class="review-meta-info">Aman Sharma</div>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <div class="review-user-text">"Before joining SkillFlare, I used to hesitate to speak even a single sentence in public. The practical training here completely changed my confidence level!"</div>
+            </div>
+            <div class="individual-review-item">
+                <button type="button" class="review-delete-btn" onclick="removeSelectedReview(this)">✖</button>
+                <div class="review-meta-info">Priya Soni</div>
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <div class="review-user-text">"Basic level se advanced modules tak bohot acche se explanation milta hai. Highly recommended to everyone!"</div>
+            </div>
+        </div>
+        
+        <button type="button" class="write-review-trigger-btn" onclick="toggleReviewForm()">Add Your Review</button>
+        
+        <div class="review-input-modal" id="reviewFormBlock">
+            <div class="input-group">
+                <label for="revName">Your Name</label>
+                <input type="text" id="revName" placeholder="Enter your full name">
+            </div>
+            <div class="input-group">
+                <label for="revStars">Rating</label>
+                <select id="revStars">
+                    <option value="⭐⭐⭐⭐⭐">5 Stars</option>
+                    <option value="⭐⭐⭐⭐">4 Stars</option>
+                    <option value="⭐⭐⭐">3 Stars</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="revMessage">Your Review Text</label>
+                <input type="text" id="revMessage" placeholder="Share your experience with us...">
+            </div>
+            <button type="button" class="btn-submit" onclick="submitUserReview()" style="background:var(--primary-dark)">Post Review</button>
+        </div>
+    </div>
+</section>
+
+<section class="trainer">
+    <div class="trainer-card">
+        <h3 data-editable="text" id="edit-trainer-block-name">MOHMMAD TAIYAB</h3>
+        <p class="title" style="font-weight: 600; color: #4a5568;" data-editable="text" id="edit-trainer-block-f">Founder, SkillFlare Academy</p>
+        <p class="subtitle" data-editable="text" id="edit-trainer-block-s">English & Communication Trainer</p>
+    </div>
+</section>
+
+<section id="register" class="registration">
+    <h2 data-editable="text" id="edit-reg-title">Register Now</h2>
+    <form id="whatsappForm" class="reg-form">
+        <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="Your full name">
+        </div>
+        <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required placeholder="Your WhatsApp number">
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="Your email address">
+        </div>
+        <div class="input-group">
+            <label for="course">Select Course</label>
+            <select id="course" required>
+                <option value="" disabled selected>Choose your course</option>
+                <option value="Beginner English">Beginner English</option>
+                <option value="Advanced English">Advanced English</option>
+                <option value="Public Speaking">Public Speaking</option>
+                <option value="Communication Skills">Communication Skills</option>
+                <option value="Voice & Accent">Voice & Accent</option>
+                <option value="Interview Preparation">Interview Preparation</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-submit"><i class="fab fa-whatsapp"></i> Register via WhatsApp</button>
+    </form>
+</section>
+
+<section class="faq">
+    <h2 data-editable="text" id="edit-faq-title">Frequently Asked Questions</h2>
+    <div class="accordion">
+        <div class="faq-item">
+            <button type="button" class="faq-question">1. What is SkillFlare Academy?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>SkillFlare Academy is a professional training platform designed to improve your English speaking, public communication, overall personality, and building core career confidence.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button type="button" class="faq-question">2. Who can join this course?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>It's perfectly crafted for school/college students, corporate job seekers, working professionals, entrepreneurs, and housewives looking to excel globally.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button type="button" class="faq-question">3. Do I need to know English before joining?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <p>No, not at all! Our dynamic curriculum starts immediately from scratch (the very basic roots) and naturally elevates your level up to absolute fluency.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button type="button" class="faq-question">Course Duration<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Our core courses range from 2 to 6 months depending on the level selected.</p></div>
+        </div>
+        <div class="faq-item">
+            <button type="button" class="faq-question">Certificate<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Yes, you will receive a certified completion certificate from SkillFlare Academy after passing the final assessment.</p></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+<p class="footer-contact-item">
+    <i class="fas fa-map-marker-alt"></i> Address: 
+    <span id="edit-address" data-editable="text">near teliyan masjid, clock tower road, sardarshahr</span>
+</p>
+
+    
+    <!-- Ye Edit button shuru me chhupa rahega (display:none) -->
+    <button id="admin-edit-btn" onclick="changeAddress()" style="display: none; background: #ff9800; border: none; color: white; font-size: 11px; cursor: pointer; margin-left: 10px; padding: 2px 8px; border-radius: 3px; font-weight: bold;">Edit Address</button>
+</div>
+
+
+    <div class="footer-container">
+        <div class="contact-info" id="contact">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-phone"></i> Call: <a href="tel:6367052851" style="color: #fff;" data-editable="link" id="lnk-call" data-href="tel:6367052851">6367052851</a></p>
+            <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/916367052851" style="color: #fff;" data-editable="link" id="lnk-wa" data-href="https://wa.me/916367052851">6367052851</a></p>
+            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:tayubsayead0@gmail.com" style="color: #fff;" data-editable="link" id="lnk-mail" data-href="mailto:tayubsayead0@gmail.com">tayubsayead0@gmail.com</a></p>
+            <p><i class="fas fa-map-marker-alt"></i> ASK city senter ,near teliyan masjid, sardarshahr</p>
+        </div>
+        <div class="social-links">
+            <h3>Follow Us</h3>
+            <p><a href="https://instagram.com/mohmmadtaiyab.xyz" target="_blank" style="color: #fff; text-decoration: none;" data-editable="link" id="lnk-inst" data-href="https://instagram.com/mohmmadtaiyab.xyz"><i class="fab fa-instagram"></i> Instagram</a></p>
+            <p><a href="https://youtube.com/mohmmadtaiyab.xyz" target="_blank" style="color: #fff; text-decoration: none;" data-editable="link" id="lnk-yt" data-href="https://youtube.com/mohmmadtaiyab.xyz"><i class="fab fa-youtube"></i> YouTube</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 SkillFlare Academy. All rights reserved. 
+            <button type="button" class="hidden-settings-trigger" id="masterGatekeeperBtn" onclick="initiateSecureAdminLogin()">⚙️ Settings</button>
+        </p>
+    </div>
+</footer>
+
+<script>
+// FAQ Accordion Logic
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const answerBox = this.nextElementSibling;
+        if (answerBox.style.display === 'block') {
+            answerBox.style.display = 'none';
+        } else {
+            document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+            answerBox.style.display = 'block';
+        }
+    });
+});
+
+// Reviews Control Module
+function toggleReviewForm() {
+    const box = document.getElementById('reviewFormBlock');
+    box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+}
+
+function submitUserReview() {
+    const name = document.getElementById('revName').value.trim();
+    const stars = document.getElementById('revStars').value;
+    const msg = document.getElementById('revMessage').value.trim();
+    
+    if(!name || !msg) {
+        alert("Please fill in both Name and Review fields completely.");
+        return;
+    }
+    
+    const targetContainer = document.getElementById('reviewsContainer');
+    const structure = document.createElement('div');
+    structure.className = 'individual-review-item';
+    structure.innerHTML = `<button type="button" class="review-delete-btn" onclick="removeSelectedReview(this)">✖</button>
+                           <div class="review-meta-info">${name}</div>
+                           <div class="review-stars">${stars}</div>
+                           <div class="review-user-text">"${msg}"</div>`;
+    
+    targetContainer.appendChild(structure);
+    
+    if (isAdminActive) {
+        structure.querySelector('.review-delete-btn').style.display = 'flex';
+    }
+    
+    document.getElementById('revName').value = "";
+    document.getElementById('revMessage').value = "";
+    toggleReviewForm();
+}
+
+function removeSelectedReview(buttonElement) {
+    if(confirm("Are you sure you want to permanently delete this review?")) {
+        buttonElement.parentElement.remove();
+    }
+}
+
+// Global Variables For Admin State
+let isAdminActive = false;
+let targetedImageElement = null;
+
+// Bind Admin Actions Globally
+document.querySelectorAll('[data-editable="image"]').forEach(el => {
+    el.addEventListener('click', handleImageTrigger);
+});
+
+document.querySelectorAll('[data-editable="link"]').forEach(el => {
+    el.addEventListener('click', handleLinkAdjustment);
+});
+
+function initiateSecureAdminLogin() {
+    const btn = document.getElementById('masterGatekeeperBtn');
+    
+    if (isAdminActive) {
+        isAdminActive = false;
+        document.body.classList.remove('admin-mode-active');
+        btn.innerHTML = '⚙️ Settings';
+        
+        document.querySelectorAll('[data-editable="text"]').forEach(el => {
+            el.contentEditable = "false";
+        });
+        document.querySelectorAll('.review-delete-btn').forEach(b => {
+            b.style.display = 'none';
+        });
+        alert("Admin Mode Disabled! Safely normal view activated.");
+        return;
+    }
+
+    const verificationInput = prompt("Enter Master Admin Password:");
+    
+    if (verificationInput === "TAIYABSAYYEDXYZ") {
+        isAdminActive = true;
+        document.body.classList.add('admin-mode-active');
+        btn.innerHTML = '🔒 Exit Admin';
+        
+        alert("ACCESS GRANTED!\n\n- Text change ke liye click karein.\n- Videos aur Links edit karne ke liye unpar click karein.");
+        
+        document.querySelectorAll('[data-editable="text"]').forEach(el => {
+            el.contentEditable = "true";
+        });
+        
+        document.querySelectorAll('.review-delete-btn').forEach(btn => {
+            btn.style.display = 'flex';
+        });
+    } else if (verificationInput !== null) {
+        alert("INVALID SECURITY CODE! Access Denied.");
+    }
+}
+
+function handleImageTrigger() {
+    if(!isAdminActive) return;
+    targetedImageElement = this;
+    document.getElementById('globalAdminImageUploader').click();
+}
+
+document.getElementById('globalAdminImageUploader').addEventListener('change', function(event) {
+    const chosenFile = event.target.files[0];
+    if(chosenFile && targetedImageElement) {
+        const fileReadingMechanism = new FileReader();
+        fileReadingMechanism.onload = function(e) {
+            targetedImageElement.setAttribute('src', e.target.result);
+        }
+        fileReadingMechanism.readAsDataURL(chosenFile);
+    }
+});
+
+function handleLinkAdjustment(event) {
+    if(!isAdminActive) return;
+    event.preventDefault();
+    const initialHref = this.getAttribute('data-href') || this.getAttribute('href');
+    const directTarget = prompt("Enter new target URL link:", initialHref);
+    if(directTarget !== null) {
+        this.setAttribute('href', directTarget);
+        this.setAttribute('data-href', directTarget);
+    }
+}
+
+// 1. Video link change karne ka main function
+function modifyVideoLink(frameId) {
+    if(!document.body.classList.contains('admin-mode-active')) return;
+    let currentSrc = document.getElementById(frameId).src;
+    let newUrl = prompt("Enter Full YouTube Share/Embed Link Here:", currentSrc);
+    if(newUrl) {
+        let cleanId = extractYoutubeId(newUrl);
+        if(cleanId) {
+            document.getElementById(frameId).src = "https://www.youtube.com/embed/" + cleanId;
+            saveAdminDataOffline();
+        } else {
+            alert("Could not filter valid YouTube URL format ID. Please ensure link is correct.");
+        }
+    }
+}
+
+// 2. YouTube ID nikalne ka updated function (Normal + Shorts dono ke liye)
+function extractYoutubeId(url) {
+    // Agar link me 'shorts/' hai toh pehle use dhoondhein
+    if (url.includes('shorts/')) {
+        let parts = url.split('shorts/');
+        if (parts[1]) {
+            return parts[1].split(/[?#&]/)[0]; // Shorts ki ID return karega
+        }
+    }
+    
+    // Normal YouTube link aur baki formats ke liye
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+document.getElementById('whatsappForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nameValue = document.getElementById('name').value;
+    const phoneValue = document.getElementById('phone').value;
+    const emailValue = document.getElementById('email').value;
+    const courseValue = document.getElementById('course').value;
+    
+    const encodedString = encodeURIComponent(`Hello SkillFlare Academy,\nI want to register for a course.\n\nName: ${nameValue}\nPhone: ${phoneValue}\nEmail: ${emailValue}\nSelected Course: ${courseValue}`);
+    window.open(`https://wa.me/916367052851?text=${encodedString}`, '_blank');
+});
+</script>
+<script>
+function changeAddress() {
+    let newAddress = prompt("Naya Address yahan likhein:", document.getElementById('editable-address').innerText);
+    if(newAddress) {
+        document.getElementById('editable-address').innerText = newAddress;
+        localStorage.setItem('user_saved_address', newAddress);
+    }
+}
+
+// Page khulte hi saved address dikhane ke liye
+window.addEventListener('DOMContentLoaded', () => {
+    let saved = localStorage.getItem('user_saved_address');
+    if(saved) {
+        document.getElementById('editable-address').innerText = saved;
+    }
+});
+</script>
+<script>
+// Admin Login Function
+function adminLogin() {
+    let pin = prompt("Enter Admin Secure Password Pin:");
+    if (pin === "1234") {
+        alert("Login Successful! Ab aap address edit kar sakte hain.");
+        // Login hote hi chhupa hua edit button dikhne lagega
+        document.getElementById('admin-edit-btn').style.display = "inline-block";
+        // Login link ko chhupa denge
+        document.getElementById('admin-login-link').style.display = "none";
+    } else if (pin !== null) {
+        alert("Galat Password! Access Denied.");
+    }
+}
+
+// Address Change Karne Ka Function
+function changeAddress() {
+    let newAddress = editable ("Naya Address yahan likhein:", document.getElementById('editable-address').innerText);
+    if(newAddress) {
+        document.getElementById('editable-address').innerText = newAddress;
+        localStorage.setItem('user_saved_address', newAddress);
+        alert("Address live update ho gaya!");
+    }
+}
+
+// Page load hote hi purana saved address check karne ke liye
+window.addEventListener('DOMContentLoaded', () => {
+    let saved = localStorage.getItem('user_saved_address');
+    if(saved) {
+        document.getElementById('editable-address').innerText = saved;
+    }
+});
+</script>
+
+</body>
+</html>

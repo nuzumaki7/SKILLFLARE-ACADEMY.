@@ -1,0 +1,313 @@
+::::root {
+    --primary-dark: #0a1d37; /* Dark Blue color like the screenshot */
+    --orange-accent: #ff9800; /* Flat Orange for button */
+    --text-dark: #111111;
+    --pure-white: #ffffff;
+}
+
+/* --- Base Reset to Avoid Side Space --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    background-color: #fbfbfb;
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+/* --- Top Dark Blue Banner Section --- */
+.top-banner {
+    background-color: var(--primary-dark);
+    color: var(--pure-white);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: 100%;
+}
+
+.banner-sub {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.banner-main {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- Header / Logo Left and Extra Large --- */
+header {
+    background: transparent;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px 15px; /* No white block look */
+}
+
+.navbar .logo img {
+    height: 120px !important; /* Logo size aur bada kar diya hai */
+    width: auto !important;
+    display: block;
+}
+
+/* --- Hero Layout --- */
+.hero {
+    padding: 1rem;
+    width: 100%;
+}
+
+.hero-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hero-content h1 {
+    font-size: 2.4rem;
+    color: var(--primary-dark);
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.hero-subtext {
+    font-size: 1.1rem;
+    color: #4a5568;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+/* --- Flat Orange Button Without Shadows --- */
+.hero-btn {
+    display: inline-block;
+    background-color: var(--orange-accent) !important;
+    color: var(--pure-white) !important;
+    padding: 0.85rem 2.5rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* --- Trainer Layout & Details Card (Like Screenshot) --- */
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.bg-shape {
+    position: absolute;
+    width: 95%;
+    height: 250px;
+    object-fit: contain;
+    z-index: 1;
+    bottom: 120px; /* Shape wrapper position */
+}
+
+.trainer-hero-img {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+    z-index: 2;
+    margin-bottom: -20px; /* Makes it overlap nicely over the card */
+    filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.1));
+}
+
+/* The White Details Card (Screenshot Style) */
+.trainer-details-card {
+    background: var(--pure-white);
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    z-index: 3;
+    border: 1px solid #f0f0f0;
+}
+
+.trainer-name {
+    font-size: 1.5rem !important;
+    color: var(--primary-dark) !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.3rem !important;
+}
+
+.trainer-title {
+    font-size: 1rem;
+    color: #2b6cb0;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.trainer-stats p {
+    font-size: 0.95rem;
+    color: #4a5568;
+    font-weight: 600;
+    margin: 0.3rem 0;
+}
+
+/* --- Global Section Grids for Mobile --- */
+.why-choose, .courses, .testimonials, .trainer, .registration, .faq {
+    padding: 3rem 1rem;
+    width: 100%;
+}
+
+h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.grid-container, .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.feature-card, .course-card {
+    background: #ffffff;
+    padding: 1.2rem 0.8rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    font-weight: 600;
+}
+
+.trainer-card h3 {
+    font-size: 1.6rem;
+    color: var(--primary-dark);
+}
+
+/* --- Form Design --- */
+.reg-form {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    width: 100%;
+    background: #25d366;
+    color: white;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* --- FAQ Accordion --- */
+.faq-item {
+    margin-bottom: 0.8rem;
+    background: white;
+    border-radius: 5px;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 1rem;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--primary-dark);
+    color: white;
+    padding: 2.5rem 1rem 1rem;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+    border-top: 1px solid #1a365d;
+    padding-top: 1rem;
+}
+
+/* Desktop Styles Optimization */
+@media (min-width: 768px) {
+    .top-banner {
+        padding: 1rem;
+    }
+    .navbar .logo img {
+        height: 140px !important;
+    }
+    .hero-container {
+        flex-direction: row;
+        text-align: left;
+        max-width: 1200px;
+        justify-content: space-between;
+    }
+    .grid-container, .course-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
