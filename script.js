@@ -262,3 +262,33 @@ if (document.readyState === 'loading') {
 } else {
     setupEventListeners();
       }
+window.modifyVideoLink = function(iframeId) {
+    if(!isAdminActive) {
+        alert("Please login to Admin Mode first!");
+        return;
+    }
+    const iframe = document.getElementById(iframeId);
+    if(!iframe) return;
+
+    let inputUrl = prompt("Enter YouTube Video URL:", iframe.src);
+    if(inputUrl && inputUrl.trim() !== "") {
+        let cleanUrl = inputUrl.trim();
+        let videoId = "";
+
+        // Extracts ID from mobile (m.youtube.com), normal desktop, share links, or embed links
+        if (cleanUrl.includes("v=")) {
+            videoId = cleanUrl.split("v=")[1].split("&")[0];
+        } else if (cleanUrl.includes("youtu.be/")) {
+            videoId = cleanUrl.split("youtu.be/")[1].split("?")[0];
+        } else if (cleanUrl.includes("embed/")) {
+            videoId = cleanUrl.split("embed/")[1].split("?")[0];
+        }
+
+        if (videoId) {
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            alert("Video updated successfully! Click 'Save Changes' at bottom.");
+        } else {
+            alert("Invalid YouTube URL! Please enter a valid YouTube video link.");
+        }
+    }
+};
