@@ -311,3 +311,6 @@ footer {
         justify-content: space-between;
     }
 }
+.bg-shape {
+    display: none !important; /* Agar shape image nahi hai toh layout kharab nahi hoga */
+}
