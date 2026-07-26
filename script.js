@@ -1,4 +1,3 @@
-// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyBbUA-8cGkBgh8aGLRDN2QoWMHZoran0bE",
   authDomain: "skillflare-d5bed.firebaseapp.com",
@@ -6,11 +5,9 @@ const firebaseConfig = {
   projectId: "skillflare-d5bed",
   storageBucket: "skillflare-d5bed.firebasestorage.app",
   messagingSenderId: "504817435329",
-  appId: "1:504817435329:web:99049c5ed9fefbd891ca40",
-  measurementId: "G-JQR0B2160X"
+  appId: "1:504817435329:web:99049c5ed9fefbd891ca40"
 };
 
-// Initialize Firebase safely
 if (typeof firebase !== 'undefined' && !firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -18,7 +15,7 @@ const database = (typeof firebase !== 'undefined') ? firebase.database() : null;
 
 let isAdminActive = false;
 
-// Global Function for Settings Button
+// Admin Login Handler
 window.initiateSecureAdminLogin = function() {
     const btn = document.getElementById('adminSettingsBtn');
     const saveBtn = document.getElementById('globalSaveBtn');
@@ -28,59 +25,49 @@ window.initiateSecureAdminLogin = function() {
         document.body.classList.remove('admin-mode-active');
         if(btn) btn.innerHTML = '⚙️ Settings';
         if(saveBtn) saveBtn.style.display = "none";
-
-        document.querySelectorAll('[data-editable="text"]').forEach(el => {
-            el.setAttribute('contenteditable', 'false');
-        });
-        alert("Admin Mode Disabled!");
+        document.querySelectorAll('[data-editable="text"]').forEach(el => el.setAttribute('contenteditable', 'false'));
+        alert("Admin Mode Closed!");
         return;
     }
 
     const verificationInput = prompt("Enter Admin Password:");
-    
     if (verificationInput === "TAIYABSAYYEDXYZ") {
         isAdminActive = true;
         document.body.classList.add('admin-mode-active');
         if(btn) btn.innerHTML = '🔒 Exit Admin';
         if(saveBtn) saveBtn.style.display = "inline-block";
-
-        document.querySelectorAll('[data-editable="text"]').forEach(el => {
-            el.setAttribute('contenteditable', 'true');
-        });
-
-        alert("Login Successful! Edit text/images and click 'Save Changes'.");
+        document.querySelectorAll('[data-editable="text"]').forEach(el => el.setAttribute('contenteditable', 'true'));
+        alert("Admin Login Successful! Click on logo, images or video overlays to update.");
     } else if (verificationInput !== null) {
         alert("INVALID PASSWORD!");
     }
 };
 
-// Modify YouTube link
-function modifyVideoLink(frameId) {
-    if(!isAdminActive) return;
-    let frame = document.getElementById(frameId);
-    let currentSrc = frame ? frame.src : "";
-    let newUrl = prompt("Enter Full YouTube Share/Embed/Shorts Link Here:", currentSrc);
-    if(newUrl) {
-        let cleanId = extractYoutubeId(newUrl);
-        if(cleanId) {
-            document.getElementById(frameId).src = "https://www.youtube.com/embed/" + cleanId;
-        } else {
-            alert("Invalid YouTube URL Format ID.");
+// Video Link Modification Handler
+window.modifyVideoLink = function(iframeId) {
+    if(!isAdminActive) {
+        alert("Please login to Admin Mode first!");
+        return;
+    }
+    const iframe = document.getElementById(iframeId);
+    if(!iframe) return;
+
+    let inputUrl = prompt("Enter YouTube URL (e.g., https://www.youtube.com/watch?v=XXXX or embed link):", iframe.src);
+    if(inputUrl && inputUrl.trim() !== "") {
+        let cleanUrl = inputUrl.trim();
+        if(cleanUrl.includes("watch?v=")) {
+            const videoId = cleanUrl.split("v=")[1].split("&")[0];
+            cleanUrl = `https://www.youtube.com/embed/${videoId}`;
+        } else if (cleanUrl.includes("youtu.be/")) {
+            const videoId = cleanUrl.split("youtu.be/")[1].split("?")[0];
+            cleanUrl = `https://www.youtube.com/embed/${videoId}`;
         }
+        iframe.src = cleanUrl;
+        alert("Video updated! Click 'Save Changes' at bottom to persist online.");
     }
-}
+};
 
-function extractYoutubeId(url) {
-    if (url.includes('shorts/')) {
-        let parts = url.split('shorts/');
-        if (parts[1]) return parts[1].split(/[?#&]/)[0];
-    }
-    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    let match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-}
-
-// Save Changes to Cloud
+// Save All Edits to Firebase Realtime Database
 function saveAdminDataOffline() {
     if(!database) {
         alert("Firebase connection failed!");
@@ -93,12 +80,16 @@ function saveAdminDataOffline() {
 
     let imagesPayload = {};
     document.querySelectorAll('[data-editable="image"]').forEach(img => {
-        if(img.id && img.src) imagesPayload[img.id] = img.src;
+        if(img.id && img.src && !img.src.includes('undefined')) {
+            imagesPayload[img.id] = img.src;
+        }
     });
 
+    let v1 = document.getElementById('vid-frame-1');
+    let v2 = document.getElementById('vid-frame-2');
     let videosPayload = {
-        "vid-frame-1": document.getElementById('vid-frame-1') ? document.getElementById('vid-frame-1').src : "",
-        "vid-frame-2": document.getElementById('vid-frame-2') ? document.getElementById('vid-frame-2').src : ""
+        "vid-frame-1": v1 ? v1.src : "",
+        "vid-frame-2": v2 ? v2.src : ""
     };
 
     let container = document.getElementById('reviewsContainer');
@@ -150,11 +141,10 @@ function submitUserReview() {
     toggleReviewForm();
 }
 
-// Attach Event Listeners Safely
+// Setup Event Listeners
 function setupEventListeners() {
     const saveBtn = document.getElementById('globalSaveBtn');
     if(saveBtn) {
-        saveBtn.style.display = "none";
         saveBtn.addEventListener('click', saveAdminDataOffline);
     }
 
@@ -165,22 +155,25 @@ function setupEventListeners() {
     if(reviewSubmit) reviewSubmit.addEventListener('click', submitUserReview);
 
     const overlay1 = document.getElementById('overlay-frame-1');
-    if(overlay1) overlay1.addEventListener('click', () => modifyVideoLink('vid-frame-1'));
+    if(overlay1) overlay1.addEventListener('click', () => window.modifyVideoLink('vid-frame-1'));
 
     const overlay2 = document.getElementById('overlay-frame-2');
-    if(overlay2) overlay2.addEventListener('click', () => modifyVideoLink('vid-frame-2'));
+    if(overlay2) overlay2.addEventListener('click', () => window.modifyVideoLink('vid-frame-2'));
 
+    // Image Editing
     document.querySelectorAll('[data-editable="image"]').forEach(img => {
         img.addEventListener('click', function() {
             if(isAdminActive) {
-                let newImgUrl = prompt("Enter Image URL link:", this.src);
+                let newImgUrl = prompt("Enter Image URL link or relative path (e.g., assets/logo.jpg):", this.src);
                 if (newImgUrl && newImgUrl.trim() !== "") {
                     this.src = newImgUrl.trim();
+                    alert("Image updated locally! Remember to click 'Save Changes'.");
                 }
             }
         });
     });
 
+    // Delete Review Handler
     const reviewsContainer = document.getElementById('reviewsContainer');
     if(reviewsContainer) {
         reviewsContainer.addEventListener('click', (e) => {
@@ -205,7 +198,7 @@ function setupEventListeners() {
         });
     });
 
-    // Realtime Database Listener
+    // Database Sync Handler
     if(database) {
         database.ref('skillflare_data').on('value', (snapshot) => {
             const data = snapshot.val();
@@ -222,7 +215,9 @@ function setupEventListeners() {
             if (data.images) {
                 Object.keys(data.images).forEach(id => {
                     let img = document.getElementById(id);
-                    if(img) img.src = data.images[id];
+                    if(img && data.images[id] && data.images[id].trim() !== "") {
+                        img.src = data.images[id];
+                    }
                 });
             }
             if (data.videos) {
@@ -266,4 +261,4 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', setupEventListeners);
 } else {
     setupEventListeners();
-}
+      }
