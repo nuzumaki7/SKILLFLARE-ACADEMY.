@@ -4,60 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillFlare Academy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-<style>
-    :root { --primary-dark: #0a1d37; --orange-accent: #ff9800; --pure-white: #ffffff; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-    body { background-color: #fbfbfb; color: #111; }
-
-    .top-banner { background-color: var(--primary-dark); color: var(--pure-white); text-align: center; padding: 1.5rem 1rem; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
-    .navbar { padding: 10px 15px; }
-    .navbar .logo img { height: 100px; width: auto; max-width: 100%; display: block; object-fit: contain; }
-
-    .hero { padding: 1rem; text-align: center; }
-    .hero-content h1 { font-size: 2.2rem; color: var(--primary-dark); font-weight: 800; }
-    .hero-subtext { font-size: 1rem; color: #4a5568; margin-top: 0.5rem; font-weight: 600; }
-    .hero-btn { display: inline-block; background-color: var(--orange-accent); color: white; padding: 0.85rem 2.5rem; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 1rem; }
-
-    .hero-image-wrapper { position: relative; width: 100%; max-width: 340px; margin: 2rem auto 0; text-align: center; }
-    .trainer-hero-img { width: 80%; height: auto; border-radius: 10px; min-height: 150px; background: #eee; }
-
-    .trainer-details-card { background: white; padding: 1.5rem 1rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-top: 10px; }
-    .trainer-name { font-size: 1.4rem; color: var(--primary-dark); font-weight: bold; }
-    .trainer-title { font-size: 0.95rem; color: #2b6cb0; font-weight: 600; }
-
-    .faq { padding: 2rem 1rem; }
-    .faq-item { margin-bottom: 0.8rem; background: white; border: 1px solid #e2e8f0; border-radius: 5px; }
-    .faq-question { width: 100%; background: none; border: none; padding: 1rem; font-size: 1rem; font-weight: bold; text-align: left; cursor: pointer; color: var(--primary-dark); display: flex; justify-content: space-between; }
-    .faq-answer { display: none; padding: 0 1rem 1rem; color: #4a5568; }
-
-    footer { background: var(--primary-dark); color: white; padding: 2rem 1rem; text-align: center; margin-top: 2rem; }
-    .hidden-settings-trigger { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 0.85rem; text-decoration: underline; }
-    .global-save-btn-active { display: none; background: var(--orange-accent); color: white; border: none; padding: 6px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; }
-
-    .admin-mode-active [contenteditable="true"] { outline: 2px dashed red; background-color: rgba(255, 0, 0, 0.05); }
-    .admin-mode-active [data-editable="image"] { outline: 3px dashed #2b6cb0 !important; cursor: pointer !important; opacity: 0.9; }
-</style>
 </head>
 <body>
 
-<!-- Hidden File Input for Gallery Selection -->
-<input type="file" id="galleryFileInput" accept="image/*" style="display: none;">
-
 <div class="top-banner">
-    <p class="banner-sub" data-editable="text" id="edit-banner-sub">Trusted by Students & Professionals</p>
+    <p class="banner-sub" data-editable="text" id="edit-banner-sub">Places</p>
     <p class="banner-main" data-editable="text" id="edit-banner-main">Exclusively for Career & Confidence Growth</p>
 </div>
 
 <header>
     <div class="navbar">
         <div class="logo">
-            <img src="https://via.placeholder.com/200x100?text=SkillFlare+Logo" alt="SkillFlare Academy Logo" data-editable="image" id="edit-logo-img">
+            <img src="assets/logo.jpg" alt="SkillFlare Academy Logo" id="edit-logo-img" data-editable="image" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x80?text=SkillFlare+Logo';">
         </div>
     </div>
 </header>
@@ -70,7 +33,7 @@
             <a href="#register" class="hero-btn">Start Learning Now</a>
         </div>
         <div class="hero-image-wrapper">
-            <img src="https://via.placeholder.com/300x350?text=Trainer+Photo" alt="Trainer" class="trainer-hero-img" data-editable="image" id="edit-trainer-img">
+            <img src="assets/trainer.jpg" alt="Trainer" class="trainer-hero-img" id="edit-trainer-img" data-editable="image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x350?text=Trainer+Photo';">
             <div class="trainer-details-card">
                 <h2 class="trainer-name" data-editable="text" id="edit-trainer-name">MOHMMAD TAIYAB</h2>
                 <p class="trainer-title" data-editable="text" id="edit-trainer-title">Communication & Speaking Coach</p>
@@ -80,15 +43,24 @@
     </div>
 </section>
 
-<section class="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-        <button type="button" class="faq-question">1. What is SkillFlare Academy? <span>▼</span></button>
-        <div class="faq-answer"><p>SkillFlare Academy provides Spoken English, Public Speaking, and Personality Development coaching.</p></div>
-    </div>
-    <div class="faq-item">
-        <button type="button" class="faq-question">2. How to join the course? <span>▼</span></button>
-        <div class="faq-answer"><p>Click on Start Learning Now or register via WhatsApp.</p></div>
+<!-- 🎬 NEW: 2 Video Upload / Embed Section -->
+<section class="videos-section">
+    <h2 class="section-heading">Watch Our Masterclasses</h2>
+    <div class="videos-grid">
+        <div class="video-card">
+            <div class="video-container">
+                <iframe id="edit-video-1" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p class="video-title" data-editable="text" id="edit-video-title-1">Video 1: Public Speaking Hacks</p>
+            <button class="admin-only-btn edit-video-btn" onclick="changeVideoUrl('edit-video-1')">🎥 Change Video 1 URL</button>
+        </div>
+        <div class="video-card">
+            <div class="video-container">
+                <iframe id="edit-video-2" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p class="video-title" data-editable="text" id="edit-video-title-2">Video 2: English Fluency Secrets</p>
+            <button class="admin-only-btn edit-video-btn" onclick="changeVideoUrl('edit-video-2')">🎥 Change Video 2 URL</button>
+        </div>
     </div>
 </section>
 
