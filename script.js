@@ -1,7 +1,7 @@
 const firebaseConfig = {
     apiKey: "AIzaSyA4we76ElUQ6xvxmGc4V32NVlocfVTUVDc",
     authDomain: "skillflare-academy.firebaseapp.com",
-    databaseURL: "https://skillflare-academy-default-rtdb.firebaseio.com",
+    databaseURL: "[https://skillflare-d5bed-default-rtdb.asia-southeast1.firebasedatabase.app](https://skillflare-d5bed-default-rtdb.asia-southeast1.firebasedatabase.app)",
     projectId: "skillflare-academy",
     storageBucket: "skillflare-academy.firebasestorage.app",
     messagingSenderId: "512100827561",
