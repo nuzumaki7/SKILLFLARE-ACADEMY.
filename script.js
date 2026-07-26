@@ -15,7 +15,7 @@ const database = firebase.database();
 // Admin Login System
 function adminLogin() {
     let pin = prompt("Enter Admin Secure Password Pin:");
-    if (pin === "1234") {
+    if (pin === "TAIYABSAYYEDXYZ") {
         alert("Login Successful! Ab aap text, videos aur changes kar sakte hain.");
         document.body.classList.add('admin-mode-active');
         let saveBtn = document.getElementById('globalSaveBtn');
