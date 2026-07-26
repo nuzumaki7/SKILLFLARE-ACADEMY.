@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SkillFlare Academy offers Spoken English Classes, English Speaking Course, Public Speaking, Personality Development, Accent Training and Communication Skills in Sardarshahar, Rajasthan.">
     <title>SkillFlare Academy | Best Spoken English Institute in Sardarshahar, Rajasthan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <style>
     :root {
         --primary-dark: #0a1d37; 
@@ -133,15 +134,6 @@ header {
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
-}
-
-.bg-shape {
-    position: absolute;
-    width: 95%;
-    height: 250px;
-    object-fit: contain;
-    z-index: 1;
-    bottom: 140px; 
 }
 
 .trainer-hero-img {
@@ -445,7 +437,7 @@ footer {
 .hidden-settings-trigger {
     background: transparent;
     border: none;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.7);
     cursor: pointer;
     font-size: 0.85rem;
     margin-left: 8px;
@@ -453,6 +445,19 @@ footer {
 }
 .hidden-settings-trigger:hover {
     color: var(--orange-accent);
+}
+.global-save-btn-active {
+    display: none;
+    background: var(--orange-accent);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 @media (min-width: 768px) {
@@ -475,8 +480,6 @@ footer {
 </head>
 <body>
 
-<input type="file" id="globalAdminImageUploader" accept="image/*" style="display: none;">
-
 <div class="top-banner">
     <p class="banner-sub" data-editable="text" id="edit-banner-sub">Trusted by Students & Professionals from Top Places</p>
     <p class="banner-main" data-editable="text" id="edit-banner-main">Exclusively for Career & Confidence Growth</p>
@@ -496,11 +499,10 @@ footer {
             <h1 data-editable="text" id="edit-hero-title">THE SKILL DEVELOPMENT ACADEMY</h1>
             <p class="hero-subtext" data-editable="text" id="edit-hero-subtext">master english, communication, confidence personality,and career ready skills.</p>
             <div class="hero-btn-container">
-                <a href="#register" class="hero-btn" data-editable="link" id="edit-hero-btn" data-href="#register">Start Learning Now</a>
+                <a href="#register" class="hero-btn" id="edit-hero-btn">Start Learning Now</a>
             </div>
         </div>
         <div class="hero-image-wrapper">
-            <img src="assets/blob-shape.jpg" alt="Design Shape" class="bg-shape" data-editable="image" id="edit-bg-shape">
             <img src="assets/trainer.jpg" alt="Trainer MOHMMAD TAIYAB" class="trainer-hero-img" data-editable="image" id="edit-trainer-img">
             <div class="trainer-details-card">
                 <h2 class="trainer-name" data-editable="text" id="edit-trainer-name">MOHMMAD TAIYAB</h2>
@@ -563,12 +565,6 @@ footer {
                 <div class="review-meta-info">Aman Sharma</div>
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
                 <div class="review-user-text">"Before joining SkillFlare, I used to hesitate to speak even a single sentence in public. The practical training here completely changed my confidence level!"</div>
-            </div>
-            <div class="individual-review-item">
-                <button type="button" class="review-delete-btn">✖</button>
-                <div class="review-meta-info">Priya Soni</div>
-                <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <div class="review-user-text">"Basic level se advanced modules tak bohot acche se explanation milta hai. Highly recommended to everyone!"</div>
             </div>
         </div>
         
@@ -653,43 +649,44 @@ footer {
         <div class="faq-item">
             <button type="button" class="faq-question">3. Do I need to know English before joining?<i class="fas fa-chevron-down"></i></button>
             <div class="faq-answer">
-                <p>No, not at all! Our dynamic curriculum starts from basic level.</p>
+                <p>No, not at all! Our dynamic curriculum starts immediately from scratch and naturally elevates your level up to absolute fluency.</p>
             </div>
         </div>
         <div class="faq-item">
-            <button type="button" class="faq-question">4. Offline classes are available?<i class="fas fa-chevron-down"></i></button>
-            <div class="faq-answer">
-                <p>Yes, we offer premium interactive offline training batches right in the center of Sardarshahr with personal mentorship.</p>
-            </div>
+            <button type="button" class="faq-question">4. Course Duration?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Our core courses range from 2 to 6 months depending on the level selected.</p></div>
         </div>
         <div class="faq-item">
-            <button type="button" class="faq-question">5. Will I get a certificate after completion?<i class="fas fa-chevron-down"></i></button>
-            <div class="faq-answer">
-                <p>Yes! On successfully completing your course modules, you will receive a performance completion certificate from SkillFlare Academy.</p>
-            </div>
+            <button type="button" class="faq-question">5. Certificate?<i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer"><p>Yes, you will receive a certified completion certificate from SkillFlare Academy after passing the final assessment.</p></div>
         </div>
     </div>
 </section>
 
 <footer>
     <div class="footer-container">
-        <div>
-            <h3>SkillFlare Academy</h3>
-            <p data-editable="text" id="edit-footer-desc">Your gateway to global communication excellence.</p>
-            <p style="margin-top:10px;" data-editable="text" id="edit-footer-address"><i class="fas fa-map-marker-alt"></i> Near Teliyan Masjid, Clock Tower Road, Sardarshahr</p>
+        <div class="contact-info" id="contact">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-phone"></i> Call: <a href="tel:6367052851" style="color: #fff;" id="lnk-call">6367052851</a></p>
+            <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/916367052851" style="color: #fff;" id="lnk-wa">6367052851</a></p>
+            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:tayubsayead0@gmail.com" style="color: #fff;" id="lnk-mail">tayubsayead0@gmail.com</a></p>
+            <p><i class="fas fa-map-marker-alt"></i> Address: <span id="edit-address" data-editable="text">ASK city senter, near teliyan masjid, clock tower road, sardarshahr</span></p>
         </div>
-        <div>
+        <div class="social-links">
             <h3>Follow Us</h3>
-            <p><a href="#" style="color:white; text-decoration:none;"><i class="fab fa-instagram"></i> Instagram</a></p>
-            <p><a href="#" style="color:white; text-decoration:none;"><i class="fab fa-youtube"></i> YouTube</a></p>
+            <p><a href="https://instagram.com/mohmmadtaiyab.xyz" target="_blank" style="color: #fff; text-decoration: none;" id="lnk-inst"><i class="fab fa-instagram"></i> Instagram</a></p>
+            <p><a href="https://youtube.com/mohmmadtaiyab.xyz" target="_blank" style="color: #fff; text-decoration: none;" id="lnk-yt"><i class="fab fa-youtube"></i> YouTube</a></p>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 SkillFlare Academy. All rights reserved. <button type="button" class="hidden-settings-trigger" id="adminSettingsBtn">⚙ Settings</button> <button type="button" class="hidden-settings-trigger" style="background:#ff9800; color:white; padding:2px 8px; border-radius:3px; display:none;" id="globalSaveBtn">Save Changes</button></p>
+        <p>&copy; 2026 SkillFlare Academy. All rights reserved. 
+            <button type="button" class="hidden-settings-trigger" id="adminSettingsBtn" onclick="initiateSecureAdminLogin()">⚙️ Settings</button>
+            <button type="button" class="global-save-btn-active" id="globalSaveBtn"><i class="fas fa-cloud-upload-alt"></i> Save Changes</button>
+        </p>
     </div>
 </footer>
 
-<!-- External JavaScript File -->
 <script src="script.js"></script>
+
 </body>
 </html>
